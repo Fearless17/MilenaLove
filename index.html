@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Milena Love</title>
+		<style>
+			body {
+				background-color: pink;
+			}
+			.container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+			h2 {
+				margin-left: 30px;
+			}
+			.button {
+				padding: 10px 20px;
+				margin: 0 10px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: transform 0.3s ease;
+			}
+			.yes-button {
+				background-color: green;
+				color: white;
+			}
+			.no-button {
+				background-color: red;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<img src="video.gif" alt="" width="500" />
+			<h2><b>Ты любишь меня?</b></h2>
+			<button class="button yes-button" id="yesButton">ДА</button>
+			<button class="button no-button" id="noButton">НЕТ</button>
+		</div>
+		<script>
+			const greenButton = document.getElementById('yesButton')
+			const redButton = document.getElementById('noButton')
+			let clickCount = 0
+
+			const texts = [
+				'Ты уверена?',
+				'Хочешь подумать ещё раз?',
+				'Я спрашиваю ещё раз',
+				'Не спеши, пожалуйста, подумай хорошенько',
+			]
+			redButton.addEventListener('click', () => {
+				if (clickCount < texts.length) {
+					redButton.textContent = texts[clickCount]
+				}
+				clickCount++
+
+				if (clickCount === 5) {
+					redButton.remove()
+					greenButton.textContent = 'Да, я люблю тебя, Владик! ❤️'
+				} else {
+					const currentSize = window
+						.getComputedStyle(greenButton)
+						.getPropertyValue('font-size')
+					const newSize = parseFloat(currentSize) * 1.5
+					greenButton.style.fontSize = newSize + 'px'
+				}
+			})
+			greenButton.addEventListener('click', () => {
+				greenButton.innerHTML = 'Да, я тоже тебя люблю, солнышко ❤️'
+				redButton.remove()
+				greenButton.style.fontSize = '3em'
+			})
+		</script>
+	</body>
+</html>
